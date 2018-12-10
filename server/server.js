@@ -1,6 +1,7 @@
 const express = require(`express`);
 const ctrl = require(`./controller/mainController`)
 
+
 const app = express();
 app.use(express.json());
 
@@ -9,11 +10,15 @@ app.get(`/api/meme`, ctrl.getOne)//pre loads in componentOnChange the first imag
 
 app.get(`/api/memes`, ctrl.randomOne)
 
+// app.get(`/api/memes`, ctrl.getPost)
+
 app.delete(`/api/meme/:id`, ctrl.deleteOne)
 
 app.put(`/api/memes/:id`, ctrl.editPost)
 
 app.post(`/api/meme`, ctrl.createPost) 
+
+
 
 
 

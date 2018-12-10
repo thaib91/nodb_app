@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../App.css'
 
 export default class Comments extends Component {
     constructor() {
@@ -24,12 +25,15 @@ export default class Comments extends Component {
 
     render() {
         return (
-            <div>
-            <input onChange={(e)=>this.updateText(e.target.value)}/>
+            <div className="inputs">
 
-            <div>
-                <button onClick={this.createNextPost}>Create Post</button>
-            </div>
+            
+            <input className="inputBox" onChange={(e)=>this.updateText(e.target.value)}/>
+
+                <div>
+                <button className="createButton" onClick={this.createNextPost}>Create Post</button>
+                </div>
+            
             </div>
 
         )

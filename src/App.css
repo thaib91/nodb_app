@@ -1,36 +1,113 @@
-.images{
-  width:100px;
-}
-
 .App {
   text-align: center;
+  /* background-color: black; */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.footer{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0%;
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 40px;
+  color: white;
+  margin-top: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.title{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0%;
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 40px;
+  color: white;
+  margin-top: 45px;
+
+
+}
+
+.images{
+  display: flex;
+  width:400px;
+  height: auto;
+  padding: 5%;
+  margin-left: 20px;
+}
+
+.inputs{
+  display:flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+ 
+}
+
+.inputBox{
+  display:flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+
+
+}
+
+.createButton{
+  display: flex;
+  align-items: center;
+  position: absolute;
+
+
+}
+
+.memeOne{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+}
+
+.centerImage{
+  display: flex;
+  flex-direction: center;
+  justify-content: baseline;
+  align-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap-reverse;
+}
+
+
+.commentText{
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 50px;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.editHousing{
+  display: flex;
+  flex-direction: column-reverse;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.editBox{
+  display: flex;
+  flex-direction: column-reverse;
 }
+
+.editButton{
+  flex: display;
+  flex-direction: column-reverse;
+}
+
+.buttonHousing{
+  flex: display;
+  flex-direction: column-reverse;
+}
+
+.deleteButton{
+  flex: display;
+  flex-direction: column-reverse;
+}
+
+

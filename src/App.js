@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css'
 import Comments from './components/comments/Comments'
-import UpdatePost from './components/UpdatePost'
+// import UpdatePost from './components/UpdatePost'
+import './reset.css'
+// import {Jumbotron} from 'react-bootstrap';
+// import {Button} from 'react-bootstrap';
+// import {Popover} from 'react-bootstrap'
 
 
 class App extends Component {
@@ -10,15 +14,20 @@ class App extends Component {
     super(props);
 
     this.state = {
-      memes: [],
       comments: [],
-      userInput: " ",
+      userInput: "",
       randomMeme: [],
-      editedInput:""
+      editedInput: ""
 
     }
-    this.createPost=this.createPost.bind(this)
+    this.createPost = this.createPost.bind(this)
+    this.editPost = this.editPost.bind(this)
+    this.deletePost = this.deletePost.bind(this)
+    this.updateEditInput = this.updateEditInput.bind(this)
   }
+
+
+
 
   componentDidMount() {
     axios.get(`/api/memes`)
@@ -29,7 +38,7 @@ class App extends Component {
         })
       })
 
-      this.getPost()
+    this.getPost()
   }
 
   randomClick() {
@@ -43,21 +52,34 @@ class App extends Component {
       })
   }
 
-  // editPost(updateID){
-  //   axios.put(`/api/memes/:id/${updateID}`, {text})
-  //     .then(res => {
-  //       console.log(res)
+  editPost(updateID, text) {
+    axios.put(`/api/memes/${updateID}`, { text })
+      .then(res => {
+        console.log(res)
+        this.setState({
+          comments: res.data,
+        })
+      })
+  }
+
+  updateEditInput=(val)=>{
+    this.setState({editedInput:val})
+  }
+  
+
+  // updateTodo=(idToUpdate, text)=>{
+  //   axios.put(`/api/todo/${idToUpdate}`, {text:text})
+  //     .then(res=>{
   //       this.setState({
-  //         comments: res.data
+  //         todos:res.data
   //       })
   //     })
-  // }
 
 
 
-  createPost(text){
-    axios.post(`/api/meme`, {text})
-      .then(res =>{
+  createPost(text) {
+    axios.post(`/api/meme`, { text })
+      .then(res => {
         console.log(res)
         this.setState({
           comments: res.data
@@ -65,25 +87,23 @@ class App extends Component {
       })
   }
 
-  getPost(){
+  getPost() {
     axios.get(`/api/meme`)
-      .then(res=>{
+      .then(res => {
         this.setState({
           comments: res.data
         })
       })
   }
 
-  deletePost(deleteID){
+  deletePost(deleteID) {
     axios.delete(`/api/meme/${deleteID}`)
-      .then(res=>{
+      .then(res => {
         this.setState({
           comments: res.data
         })
       })
   }
-
-
 
   handleChange(prop, val) {
     this.setState({
@@ -91,45 +111,69 @@ class App extends Component {
     })
   }
 
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
 
   render() {
 
-
     const displayMeme = this.state.randomMeme.map((memeOne) => {
       return (
-          <div key={memeOne}>
-            <img onClick={() => this.randomClick()}  className="images" src={memeOne.meme} alt="" />
-          </div>
+
+
+        <div key={memeOne} className="memeOne">
+
+          <span className='centerImage'>
+          <img onClick={() => this.randomClick()} className="images" src={memeOne.meme} alt="" />
+
+            <Comments createPostFn={this.createPost} />
+          </span>
+
+
+
+          {this.state.comments.map((comment, id) => {
+            console.log(comment)
+            return (
+              <div>
+              <input type="text" value={this.state.editedInput} onChange={(e)=>this.updateEditInput(e.target.value)}/>
+              <button onClick={()=>this.editPost(+comment.id, this.state.editedInput)}>Edit</button>
+              
+
+
+              <span className="buttonHousing">
+                {/* <UpdatePost editPostFn={this.editPost}
+                  text={comment.text}
+                  id={comment.id}
+                /> */}
+                <span className="commentText">{comment.text}</span> 
+                {/* do I need to redefine comment.text */}
+                <div className="deleteButton">
+                  <button onClick={() => this.deletePost(comment.id)}>Delete</button>
+
+                </div>
+              </span>
+
+              </div>
+              )
+            })
+          }
+
+      </div>
       )
-
-
     })
 
 
     return (
       <div className="App">
-      {displayMeme}
 
-      <Comments createPostFn={this.createPost}/>
-    
-        {this.state.comments.map((comment)=>{
-          console.log(comment)
-          return(
-            <div key={comment.id}>
-              {comment.text}
-              <div>
-              <button onClick={()=>this.deletePost(comment.id)}>Delete</button>
-              <button onClick={()=>this.editPost(comment.id)}>Edit</button>
-              </div>
-            </div>
-          )
-        })}
+        <h1 className="title">Make an app with CRUD they said...</h1>
+        {displayMeme}
 
-
-     
         {/* <div>
             <button className="randomButton" onClick={() => this.randomClick()}></button>
           </div> */}
+
+        <h1 className="footer">It'll be fun they said... #SayNoToPut</h1>
 
       </div>
     );
